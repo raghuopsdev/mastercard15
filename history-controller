@@ -1,0 +1,116 @@
+    1  yum update -y
+    2  wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    3  yum install epel-release-latest-7.noarch.rpm -y
+    4  yum update -y
+    5  yum install git python python-devel python-pip openssl ansible -y
+    6  ansible --version
+    7  ip a
+    8  w
+    9  yum repolist
+   10  df -h
+   11  usermod -aG wheel lab2
+   12  exit
+   13  usermod -aG wheel admin
+   14  sudo admin
+   15  sudo su admin
+   16  ls
+   17  ansible --version
+   18  yum repolist
+   19  ping google.com
+   20  ls
+   21  adduser admin
+   22  nvadmin@767
+   23  passwd admin
+   24  nano /etc/ssh/sshd_config 
+   25  service sshd restart
+   26  usermod -aG wheel admin
+   27  ansible --version
+   28  export PS1="Controller# "
+   29  yum repolist
+   30  ssh client@13.126.112.34
+   31  whoami
+   32  cd /root/
+   33  ls
+   34  cd .ssh
+   35  pwd
+   36  ls -l
+   37  ssh-keygen
+   38  ls -l
+   39  cat id_rsa.pub 
+   40  history
+   41  export PS1="Controller# "
+   42  cd /root/.ssh/
+   43  ll
+   44  ssh 172.31.13.164
+   45  pwd
+   46  mkdir ansible_playbook
+   47  cd ansible_playbook/
+   48  ll
+   49  git --version
+   50  git init
+   51  git branch
+   52  pwd
+   53  ll
+   54  touch test.txt
+   55  git add .
+   56  git commit . -m "Test"
+   57  git branch
+   58  git remote add origin https://github.com/raghuopsdev/mastercard15.git
+   59  git remote -v
+   60  git push -u origin main
+   61  git push -u origin master
+   62  ls -lrth
+   63  git branch
+   64  git branch main
+   65  git checkout main
+   66  git branch
+   67  git status
+   68  touch main.txt
+   69  git add .
+   70  git commit . -m "test"
+   71  git status
+   72  git push -u origin main
+   73  git pull origin main
+   74  ll
+   75  git push -u origin main
+   76  git pull origin master
+   77  git pull origin main
+   78  git pull origin main --allow-unrelated-histories
+   79  git push -u origin main
+   80  ls -lrth
+   81  rm *
+   82  vim apache.yml
+   83  vi /etc/ansible/hosts
+   84  vim apache.yml
+   85  vi /etc/ansible/hosts
+   86  export PS1="Controller# "
+   87  cd /root/ansible_playbook/
+   88  ll
+   89  vi apache.yml 
+   90  vim apache.yml 
+   91  cd /root/ansible_playbook/
+   92  ll
+   93  vim apache.yml 
+   94  ansible-playbook apache.yml --syntax-check
+   95  ansible-playbook -C apache.yml
+   96  vi /etc/ansible/ansible.cfg 
+   97  ansible-playbook apache.yml
+   98  git push -u origin main
+   99  git add .
+  100  git commit . -m "apache"
+  101  git push -u origin main
+  102  ls -lrth
+  103  vi apache.yml 
+  104  vim apache.yml 
+  105  git ls-files
+  106  rm .apache.yml.swo 
+  107  git ls-files
+  108  git rm .apache.yml.swo 
+  109  git ls-files
+  110  git push -u origin main
+  111  vi /etc/ansible/ansible.cfg 
+  112  vi /etc/ansible/hosts 
+  113  cat /etc/ansible/hosts
+  114  history
+  115  ansible -m ping all
+  116  history > controller
