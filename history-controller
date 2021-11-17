@@ -90,27 +90,179 @@
    90  vim apache.yml 
    91  cd /root/ansible_playbook/
    92  ll
-   93  vim apache.yml 
-   94  ansible-playbook apache.yml --syntax-check
-   95  ansible-playbook -C apache.yml
-   96  vi /etc/ansible/ansible.cfg 
-   97  ansible-playbook apache.yml
-   98  git push -u origin main
-   99  git add .
-  100  git commit . -m "apache"
-  101  git push -u origin main
-  102  ls -lrth
-  103  vi apache.yml 
-  104  vim apache.yml 
-  105  git ls-files
-  106  rm .apache.yml.swo 
-  107  git ls-files
-  108  git rm .apache.yml.swo 
-  109  git ls-files
-  110  git push -u origin main
-  111  vi /etc/ansible/ansible.cfg 
-  112  vi /etc/ansible/hosts 
-  113  cat /etc/ansible/hosts
-  114  history
-  115  ansible -m ping all
-  116  history > controller
+   93  ansible -m ping all
+   94  ansible -m ping webserver
+   95  ll
+   96  vim apache.yml 
+   97  cd /root/ansible_playbook/
+   98  ll
+   99  vim apache.yml 
+  100  ansible-playbook apache.yml --syntax-check
+  101  ansible-playbook -C apache.yml
+  102  vi /etc/ansible/ansible.cfg 
+  103  ansible-playbook apache.yml
+  104  git push -u origin main
+  105  git add .
+  106  git commit . -m "apache"
+  107  git push -u origin main
+  108  ls -lrth
+  109  vi apache.yml 
+  110  vim apache.yml 
+  111  git ls-files
+  112  rm .apache.yml.swo 
+  113  git ls-files
+  114  git rm .apache.yml.swo 
+  115  git ls-files
+  116  git push -u origin main
+  117  vi /etc/ansible/ansible.cfg 
+  118  vi /etc/ansible/hosts 
+  119  cat /etc/ansible/hosts
+  120  history
+  121  ansible -m ping all
+  122  history > controller
+  123  ll
+  124  mv controller history-controller
+  125  ll
+  126  git add .
+  127  git commit . -m "history"
+  128  git push -u origin main
+  129  ll
+  130  vi import.yml
+  131  cat import.yml 
+  132  ansible-playboom import.yml 
+  133  ansible-playbook import.yml 
+  134  git push -u origin main
+  135  git add .
+  136  git commit . -m "import"
+  137  git push -u origin main
+  138  cat import.yml 
+  139  vim register.yml
+  140  ansible-playbook register.yml 
+  141  vim register.yml 
+  142  ansible-playbook register.yml 
+  143  cat register.yml 
+  144  ansible-doc -l
+  145  ansible-doc file
+  146  vim magic.yml
+  147  ansible-playbook magic.yml --syntax-check
+  148  ansible-playbook -C magic.yml
+  149  ansible-playbook magic.yml
+  150  ll
+  151  git status
+  152  git add .
+  153  git commit . -m "register & magic"
+  154  git push -u origin main
+  155  ll
+  156  vi vars_prompt.yml
+  157  ansible-playbook vars_prompt.yml --syntax-check
+  158  ansible-playbook -C vars_prompt.yml
+  159  ll
+  160  git status
+  161  git add .
+  162  git commit . -m "vars_prompt"
+  163  git push -u origin main
+  164  cd .git/
+  165  ll
+  166  cd ..
+  167  git status
+  168  ls -lrth
+  169  vim handler.yml
+  170  ansible-playbook handler.yml --syntax-check
+  171  ansible-playbook -C handler.yml
+  172  ll
+  173  touch proxy.conf
+  174  ansible-playbook -C handler.yml
+  175  vi handler.yml 
+  176  ansible-playbook -C handler.yml
+  177  ansible-playbook handler.yml
+  178  git status
+  179  git add .
+  180  git commit . -m "handler_exercise"
+  181  git push -u origin main
+  182  vi index.html
+  183  cat index.html 
+  184  vi web-name.yml
+  185  ansible-playbook web-name.yml --syntax-check
+  186  ansible-playbook web-name.yml
+  187  vi web-name.yml
+  188  ls -lrth
+  189  vi web-name.yml
+  190  ansible-playbook web-name.yml
+  191  vi web-name.yml
+  192  ansible-playbook web-name.yml
+  193  ls -lrth
+  194  git add .
+  195  git commit . -m "web-index"
+  196  git push -u origin main
+  197  cd /root/ansible_playbook/
+  198  ll
+  199  ls -lrth
+  200  cat web-name.yml 
+  201  cat handler.yml 
+  202  cat magic.yml 
+  203  ls -lrth
+  204  cat import.yml 
+  205  cat apache.yml 
+  206  ls -lrth
+  207  cat web-name.yml 
+  208  cat handler.yml 
+  209  ansible-galaxy init apache
+  210  ls -lrth
+  211  tree apache
+  212  yum install -y tree
+  213  tree apache
+  214  ll
+  215  cd apache/
+  216  ll
+  217  cd tasks
+  218  vi main.yml 
+  219  pwd
+  220  cd ..
+  221  vi handlers/main.yml 
+  222  vi tasks/main.yml 
+  223  vi vars/main.yml 
+  224  vi templates/index.j2
+  225  vi vars/main.yml 
+  226  ll
+  227  cd ..
+  228  ll
+  229  vi web_role.yml
+  230  ansible-galaxy web_role.yml --syntax-check
+  231  ansible-playbook web_role.yml --syntax-check
+  232  vi web_role.yml 
+  233  ansible-playbook web_role.yml --syntax-check
+  234  vi web_role.yml 
+  235  ansible-playbook web_role.yml --syntax-check
+  236  cat web_role.yml 
+  237  ll
+  238  cd apache/
+  239  ll
+  240  cd meta/
+  241  ll
+  242  vi main.yml 
+  243  cd ..
+  244  ll
+  245  ls -lrth
+  246  cd ..
+  247  ll
+  248  ansible-playbook web_role.yml 
+  249  ll
+  250  ansible-playbook web_role.yml --syntax-check
+  251  vi apache/tasks/main.yml 
+  252  cd apache/templates/
+  253  ll
+  254  touch proxy.j2
+  255  cd ../../
+  256  ll
+  257  ansible-playbook web_role.yml 
+  258  vi apache/handlers/main.yml 
+  259  vi apache/tasks/main.yml 
+  260  vi apache/vars/main.yml 
+  261  ansible-playbook web_role.yml 
+  262  ll
+  263  git status
+  264  git add .
+  265  git commit . -m "apache role"
+  266  git push -u origin main
+  267  history 
+  268  history > history-controller 
