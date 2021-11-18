@@ -1,0 +1,490 @@
+[root@ip-172-31-13-53 ansible_playbook]# history
+    1  yum update -y
+    2  wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    3  yum install epel-release-latest-7.noarch.rpm -y
+    4  yum update -y
+    5  yum install git python python-devel python-pip openssl ansible -y
+    6  ansible --version
+    7  ip a
+    8  w
+    9  yum repolist
+   10  df -h
+   11  usermod -aG wheel lab2
+   12  exit
+   13  usermod -aG wheel admin
+   14  sudo admin
+   15  sudo su admin
+   16  ls
+   17  ansible --version
+   18  yum repolist
+   19  ping google.com
+   20  ls
+   21  adduser admin
+   22  nvadmin@767
+   23  passwd admin
+   24  nano /etc/ssh/sshd_config
+   25  service sshd restart
+   26  usermod -aG wheel admin
+   27  ansible --version
+   28  export PS1="Controller# "
+   29  yum repolist
+   30  ssh client@13.126.112.34
+   31  whoami
+   32  cd /root/
+   33  ls
+   34  cd .ssh
+   35  pwd
+   36  ls -l
+   37  ssh-keygen
+   38  ls -l
+   39  cat id_rsa.pub
+   40  history
+   41  export PS1="Controller# "
+   42  cd /root/.ssh/
+   43  ll
+   44  ssh 172.31.13.164
+   45  pwd
+   46  mkdir ansible_playbook
+   47  cd ansible_playbook/
+   48  ll
+   49  git --version
+   50  git init
+   51  git branch
+   52  pwd
+   53  ll
+   54  touch test.txt
+   55  git add .
+   56  git commit . -m "Test"
+   57  git branch
+   58  git remote add origin https://github.com/raghuopsdev/mastercard15.git
+   59  git remote -v
+   60  git push -u origin main
+   61  git push -u origin master
+   62  ls -lrth
+   63  git branch
+   64  git branch main
+   65  git checkout main
+   66  git branch
+   67  git status
+   68  touch main.txt
+   69  git add .
+   70  git commit . -m "test"
+   71  git status
+   72  git push -u origin main
+   73  git pull origin main
+   74  ll
+   75  git push -u origin main
+   76  git pull origin master
+   77  git pull origin main
+   78  git pull origin main --allow-unrelated-histories
+   79  git push -u origin main
+   80  ls -lrth
+   81  rm *
+   82  vim apache.yml
+   83  vi /etc/ansible/hosts
+   84  vim apache.yml
+   85  vi /etc/ansible/hosts
+   86  export PS1="Controller# "
+   87  cd /root/ansible_playbook/
+   88  ll
+   89  vi apache.yml
+   90  vim apache.yml
+   91  cd /root/ansible_playbook/
+   92  ll
+   93  ansible -m ping all
+   94  ansible -m ping webserver
+   95  ll
+   96  vim apache.yml
+   97  cd /root/ansible_playbook/
+   98  ll
+   99  vim apache.yml
+  100  ansible-playbook apache.yml --syntax-check
+  101  ansible-playbook -C apache.yml
+  102  vi /etc/ansible/ansible.cfg
+  103  ansible-playbook apache.yml
+  104  git push -u origin main
+  105  git add .
+  106  git commit . -m "apache"
+  107  git push -u origin main
+  108  ls -lrth
+  109  vi apache.yml
+  110  vim apache.yml
+  111  git ls-files
+  112  rm .apache.yml.swo
+  113  git ls-files
+  114  git rm .apache.yml.swo
+  115  git ls-files
+  116  git push -u origin main
+  117  vi /etc/ansible/ansible.cfg
+  118  vi /etc/ansible/hosts
+  119  cat /etc/ansible/hosts
+  120  history
+  121  ansible -m ping all
+  122  history > controller
+  123  ll
+  124  mv controller history-controller
+  125  ll
+  126  git add .
+  127  git commit . -m "history"
+  128  git push -u origin main
+  129  ll
+  130  vi import.yml
+  131  cat import.yml
+  132  ansible-playboom import.yml
+  133  ansible-playbook import.yml
+  134  git push -u origin main
+  135  git add .
+  136  git commit . -m "import"
+  137  git push -u origin main
+  138  cat import.yml
+  139  vim register.yml
+  140  ansible-playbook register.yml
+  141  vim register.yml
+  142  ansible-playbook register.yml
+  143  cat register.yml
+  144  ansible-doc -l
+  145  ansible-doc file
+  146  vim magic.yml
+  147  ansible-playbook magic.yml --syntax-check
+  148  ansible-playbook -C magic.yml
+  149  ansible-playbook magic.yml
+  150  ll
+  151  git status
+  152  git add .
+  153  git commit . -m "register & magic"
+  154  git push -u origin main
+  155  ll
+  156  vi vars_prompt.yml
+  157  ansible-playbook vars_prompt.yml --syntax-check
+  158  ansible-playbook -C vars_prompt.yml
+  159  ll
+  160  git status
+  161  git add .
+  162  git commit . -m "vars_prompt"
+  163  git push -u origin main
+  164  cd .git/
+  165  ll
+  166  cd ..
+  167  git status
+  168  ls -lrth
+  169  vim handler.yml
+  170  ansible-playbook handler.yml --syntax-check
+  171  ansible-playbook -C handler.yml
+  172  ll
+  173  touch proxy.conf
+  174  ansible-playbook -C handler.yml
+  175  vi handler.yml
+  176  ansible-playbook -C handler.yml
+  177  ansible-playbook handler.yml
+  178  git status
+  179  git add .
+  180  git commit . -m "handler_exercise"
+  181  git push -u origin main
+  182  vi index.html
+  183  cat index.html
+  184  vi web-name.yml
+  185  ansible-playbook web-name.yml --syntax-check
+  186  ansible-playbook web-name.yml
+  187  vi web-name.yml
+  188  ls -lrth
+  189  vi web-name.yml
+  190  ansible-playbook web-name.yml
+  191  vi web-name.yml
+  192  ansible-playbook web-name.yml
+  193  ls -lrth
+  194  git add .
+  195  git commit . -m "web-index"
+  196  git push -u origin main
+  197  cd /root/ansible_playbook/
+  198  ll
+  199  ls -lrth
+  200  cat web-name.yml
+  201  cat handler.yml
+  202  cat magic.yml
+  203  ls -lrth
+  204  cat import.yml
+  205  cat apache.yml
+  206  ls -lrth
+  207  cat web-name.yml
+  208  cat handler.yml
+  209  ansible-galaxy init apache
+  210  ls -lrth
+  211  tree apache
+  212  yum install -y tree
+  213  tree apache
+  214  ll
+  215  cd apache/
+  216  ll
+  217  cd tasks
+  218  vi main.yml
+  219  pwd
+  220  cd ..
+  221  vi handlers/main.yml
+  222  vi tasks/main.yml
+  223  vi vars/main.yml
+  224  vi templates/index.j2
+  225  vi vars/main.yml
+  226  ll
+  227  cd ..
+  228  ll
+  229  vi web_role.yml
+  230  ansible-galaxy web_role.yml --syntax-check
+  231  ansible-playbook web_role.yml --syntax-check
+  232  vi web_role.yml
+  233  ansible-playbook web_role.yml --syntax-check
+  234  vi web_role.yml
+  235  ansible-playbook web_role.yml --syntax-check
+  236  cat web_role.yml
+  237  ll
+  238  cd apache/
+  239  ll
+  240  cd meta/
+  241  ll
+  242  vi main.yml
+  243  cd ..
+  244  ll
+  245  ls -lrth
+  246  cd ..
+  247  ll
+  248  ansible-playbook web_role.yml
+  249  ll
+  250  ansible-playbook web_role.yml --syntax-check
+  251  vi apache/tasks/main.yml
+  252  cd apache/templates/
+  253  ll
+  254  touch proxy.j2
+  255  cd ../../
+  256  ll
+  257  ansible-playbook web_role.yml
+  258  vi apache/handlers/main.yml
+  259  vi apache/tasks/main.yml
+  260  vi apache/vars/main.yml
+  261  ansible-playbook web_role.yml
+  262  ll
+  263  git status
+  264  git add .
+  265  git commit . -m "apache role"
+  266  git push -u origin main
+  267  history
+  268  history > history-controller
+  269  git add .
+  270  git status
+  271  git commit .
+  272  git push -u origin main
+  273  pwd
+  274  ansible-galaxy install zaxos.tomcat-ansible-role
+  275  cd /root/.ansible/roles/
+  276  ll
+  277  tree zaxos.tomcat-ansible-role/
+  278  pwd
+  279  cd zaxos.tomcat-ansible-role/
+  280  ll
+  281  cd tasks/
+  282  ll
+  283  vi main.yml
+  284  cat install.yml
+  285  ll
+  286  cat configure.yml
+  287  ll
+  288  cat uninstall.yml
+  289  cd ..
+  290  ll
+  291  cd vars/
+  292  ll
+  293  cat main.yml
+  294  cd ..
+  295  cd defaults/
+  296  ll
+  297  cat main.yml
+  298  cd ..
+  299  ll
+  300  cd zaxos.tomcat-ansible-role/
+  301  ll
+  302  cd defaults/
+  303  ll
+  304  cat main.yml | grep present
+  305  pwd
+  306  cd ../../
+  307  ansible-galaxy init tomcat
+  308  ll
+  309  mv tomcat/ /root/ansible_playbook/
+  310  cd /root/ansible_playbook/
+  311  ll
+  312  vi tomcat/tasks/main.yml
+  313  vi tomcat/handlers/main.yml
+  314  vi tomcat/tasks/main.yml
+  315  ll
+  316  cp web_role.yml tomcat_role.yml
+  317  vi tomcat_role.yml
+  318  ansible-playbook tomcat_role.yml --syntax-check
+  319  ansible-playbook tomcat_role.yml
+  320  ll
+  321  vi tomcat/tasks/main.yml
+  322  vi tomcat/handlers/main.yml
+  323  vi tomcat/tasks/main.yml
+  324  ansible-playbook tomcat_role.yml
+  325  vi tomcat/tasks/main.yml
+  326  ansible-playbook tomcat_role.yml
+  327  vi apache/tasks/main.yml
+  328  vi apache/handlers/main.yml
+  329  vi tomcat/tasks/main.yml
+  330  vi tomcat/handlers/main.yml
+  331  ansible-playbook tomcat_role.yml
+  332  pwd
+  333  ll
+  334  cd tomcat/
+  335  ll
+  336  cd tasks/
+  337  ll
+  338  vi main.yml
+  339  cd ..
+  340  ll
+  341  cd ..
+  342  car tomcat_role.yml
+  343  cat tomcat_role.yml
+  344  vi disk_utli.yml
+  345  ansible-playbook disk_utli.yml --syntax-check
+  346  ansible-playbook disk_utli.yml
+  347  vi disk_utli.yml
+  348  ansible-playbook disk_utli.yml
+  349  cat disk_utli.yml
+  350  ansible-doc shell
+  351  ll
+  352  vi linein.yml
+  353  vim linein.yml
+  354  ansible-playbook linein.yml
+  355  ls -lrth
+  356  git status
+  357  git add .
+  358  git commit . -m "few more play"
+  359  git status
+  360  git push -u origin main
+  361  ll
+  362  pwd
+  363  exit
+  364  pwd
+  365  pwd
+  366  cd /root/
+  367  ll
+  368  cd ansible_playbook/
+  369  ls -lrth
+  370  vi ec2.yml
+  371  cat ec2.yml
+  372  ansible-vault create pass.yml
+  373  cat pass.yml
+  374  ansible-vault edit pass.yml
+  375  ansible-playbook pass.yml --syntax-check
+  376  ansible-playbook pass.yml --syntax-check --ask-vault-pwd
+  377  ansible-playbook pass.yml --syntax-check --ask-vault-passwd
+  378  ansible-playbook pass.yml --syntax-check --ask-vault-pass
+  379  yum list | grep boto
+  380  yum install -y python2-boto.noarch
+  381  ansible-playbook pass.yml --syntax-check --ask-vault-pass
+  382  cat ec2.yml
+  383  ansible-vault edit pass.yml
+  384  ansible-playbook -C pass.yml --ask-vault-pass
+  385  cat ec2.yml
+  386  ansible-vault edit pass.yml
+  387  cat ec2.yml
+  388  vi ec2.yml
+  389  ansible-playbook -C pass.yml --ask-vault-pass
+  390  ansible-playbook -C ec2.yml --ask-vault-pass
+  391  vi /etc/ansible/hosts
+  392  ansible-playbook -C ec2.yml --ask-vault-pass
+  393  ansible-playbook ec2.yml --ask-vault-pass
+  394  cat ec2.yml
+  395  ansible-vault create pass.yml
+  396  ansible-vault edit pass.yml
+  397  vi elb.yml
+  398  ansible-playbook elb.yml --ask-vault-pass
+  399  git status
+  400  git add .
+  401  git status
+  402  git commit . -m "AWS"
+  403  git status
+  404  git push -u origin main
+  405  git pull origin master
+  406  git push -u origin main
+  407  cd /home/
+  408  yum repolist
+  409  ansible --version
+  410  yum install jenkins
+  411  yum list | grep jdk
+  412  yum install java-latest-openjdk-devel.x86_64
+  413  java -version
+  414  sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  415  yum repolist
+  416  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+  417  sudo yum upgrade
+  418  yum install epel-release
+  419  yum install jenkins
+  420  service jenkins start
+  421  curl ifconfig.co
+  422  ps -ef | grep jenkin
+  423  netstat -tnlp | grep 8080
+  424  systemctl daemon-reload
+  425  netstat -tnlp | grep 8080
+  426  ps -ef | grep jenkin
+  427  service jenkins start
+  428  ps -ef | grep jenkin
+  429  java -version
+  430  /etc/init.d/jenkins status
+  431  ps -ef | grep java
+  432  netstat -tnlp | grep 8080
+  433  service jenkins start
+  434  ps -ef | grep java
+  435  /etc/init.d/jenkins stop
+  436  netstat -tnlp | grep 8080
+  437  service jenkins start
+  438  java -version
+  439  yum list | grep jdk
+  440  yum install -y java-1.8.0-openjdk-devel.x86_64
+  441  java -version
+  442  service jenkins start
+  443  ps -ef | grep java
+  444  cat /var/lib/jenkins/secrets/initialAdminPassword
+  445  echo $JAVA
+  446  cd /usr/lib/jvm
+  447  ls -lrth
+  448  cd java-1.8.0-openjdk
+  449  ls
+  450  pwd
+  451  cd /home/
+  452  ll
+  453  cd ec2-user/
+  454  ll
+  455  cd ..
+  456  cd /root/
+  457  ll
+  458  cd ansible_playbook/
+  459  ll
+  460  vi deploy.yml
+  461  ansible-playbook deploy.yml
+  462  ansible -m ping all
+  463  ssh 172.31.13.164
+  464  cd /root/.ssh/
+  465  ll
+  466  cat id_rsa.pub
+  467  ssh 172.31.13.164
+  468  ansible -m ping all
+  469  cd -
+  470  ansible-playbook deploy.yml
+  471  ifconfig
+  472  vi /etc/passwd
+  473  su jenkins
+  474  su jenkins
+  475  passwd jenkins
+  476  pwd
+  477  usermod -aG wheel jenkins
+  478  id jenkins
+  479  vi /etc/sudoers
+  480  su jenkins
+  481  pwd
+  482  su jenkins
+  483  ls -lrth
+  484  vi /root/.ssh/authorized_keys
+  485  vi /etc/ssh/sshd_config
+  486  curl ifconfig.co
+  487  passwd
+  488  cat deploy.yml
+  489  history
