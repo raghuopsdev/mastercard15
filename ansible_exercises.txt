@@ -1,0 +1,519 @@
+ ===============================
+
+ To Include another YML file
+ 
+ ===============================
+
+ ---
+ # file: site.yml
+ #	- include: webservers.yml (Deprecating)
+ #	- include: dbservers.yml
+   - import_playbook: webserver.yml (This is the latest module)
+
+ ===============================
+
+ To Regster output of a command
+ ===============================
+
+ ---
+ - hosts: webservers
+   become: yes
+   tasks:
+     - shell: /usr/bin/whoami
+       register: username
+
+     - file: path=/tmp/info.txt owner={{username}}
+
+
+ =================================
+
+ Debug module is used to print messages or variable.
+
+ ---
+ - hosts: all
+   vars:
+      http_port: 8087
+      username: raghu
+
+   tasks:
+      - debug: msg="Inventory hostnames are {{inventory_hostname}}"
+      - debug: msg="Port variable is {{http_port}} & username is {{username}}"
+
+  =================================
+
+  To List all plugins available with Ansible
+
+   # ansible-doc -l
+  ==================================
+
+  Prompting for input
+
+  ---
+  - hosts: dbservers
+    vars:
+      http_port: 8087
+      username: raghu
+
+    vars_prompt:
+    - name: "dbpass"
+      prompt: "Enter password for database"
+
+    tasks:
+    - debug: msg=" DB password is {{dbpass}}"
+ ============================
+
+   Handlers
+  
+   ---
+   - hosts: webservers
+     become: yes
+     tasks:
+       - name: Copy the website config file
+         copy: src=httpd.conf dest=/etc/httpd/conf/httpd.conf
+
+         notify:
+           - Apache Restart
+
+     handlers:
+        - name: Apache Restart
+          service: name=httpd state=restart
+  ===============================
+
+  Templates
+
+  mkdir templates
+  vi templates/index.html
+
+  <html>
+  <head><title>Hello from Raghu</title></head>
+  <body>
+  <h1> Congrats </h1>
+  <p> Nice Job {{ username }} </p>
+  </body>
+  </html>
+ 
+      ====================
+
+  ---
+  - hosts: webservers
+    sudo: yes
+    vars:
+      username: Ashok
+      doc_root: /var/www/html/
+    tasks:
+      -name: Copy site file
+       template: src=templates/index.html dest={{doc_root}}/index.html mode=0644
+
+  ========================================================
+
+  A Sample playook with variables, templates, condition and handlers
+
+    ansible.cfg
+    inventory_prod
+    templates
+    web.yaml
+
+
+//file    ansible.cfg
+      
+       [defaults]
+       hostfile = inventory_prod
+       host_key_checking = False
+
+
+//file    inventoy_prod
+
+      web1 ansible_ssh_host=192.12.1.11
+      db1 ansible_ssh_host=192.168.1.8
+
+
+     [webservers]
+     web1
+
+     [dbservers]
+     db1
+
+     [datacenter:children]
+     webservers
+     dbservers
+
+     [datcenter:vars]
+      ansible_ssh_user=docker
+      ansibe_ssh_pass=docker
+
+//file templats/
+
+    index.html
+    httpd.conf
+
+
+//index.html
+
+  <html>
+  <head><title>Hello from Raghu</title></head>
+  <body>
+  <h1> Congrats ,/h1>
+  <p> Nice Job {{ username }} </p>
+  </body>
+  </html>
+   
+
+//httpd.conf - get it from a installation
+
+
+// web.yml
+
+  ---
+  - host: webservers
+    sudo: yes
+    vars:
+      http_port: 80
+      doc_dir: /ansible/
+      doc_root: /var/www/html/ansible/
+      max_clients: 5
+      ansible_python_interpreter: python
+    vars_prompt:
+      - name: "username"
+        prompt: what is your name ?
+    tasks:
+      - name: Ensure lib-python installed
+        yum: name=libselinux-python state=present
+      - name: ensure httpd installed
+        yum: name=httpd state=present
+        when: ansible_os_family == "RedHat"
+
+      - name: create a directory
+        file: path=/var/www/html/ansible state=directory
+
+      - name: ensure apache running
+        service: name=httpd enabled=yes state=started
+
+      - name: deploy template
+        template: src=templates/httpd.conf dest=/etc/httpd/conf/httpd.conf
+        notify:
+          - Restart apache
+
+
+      - name: copy static files
+        template: src=templates/index.html dest={{doc_root}}/index.html mode=0644
+    handlers:
+       - name: Restart apache
+         service: name=httpd state=restarted
+
+======================
+LOOPS
+
+Disk Utilization
+
+
+---
+- name: Check disk space usage
+  hosts: all
+  tasks:
+    
+     - name: Check disk space usage on servers
+       shell: df -Th
+       register: result
+     - debug:
+          var: result.stdout_lines
+       when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+
+
+
+when:
+  ansible_distribution in ['RedHat', 'CentOS', 'ScientificLinux'] and
+  (ansible_distribution_version|version_compare('7', '<') or
+  ansible_distribution_version|version_compare('8', '>='))
+  or
+  ansible_distribution == 'Fedora'
+  or
+  ansible_distribution == 'Ubuntu' and
+  ansible_distribution_version|version_compare('15.04', '>=')
+
+
+==========
+
+with_items - dictionary
+
+---
+- hosts: webserver
+  become: yes
+  tasks:
+  - name: manage packages
+    package: name={{ item.name }} state={{ item.state }}
+    with_items:
+      - { name: tree, state: present }
+      - { name: nmap, state: present }
+      - { name: tomcat*, state: absent }
+
+with_items - predefined dictionary
+
+---
+- hosts: webserver
+  become: yes
+  vars:
+    packages:
+    - name: tree
+      state: present
+    - name: nmap
+      state: present
+    - name: tomcat
+      state: absent
+  tasks:
+  - name: manage packages
+    package: name={{ item.name }} state={{ item.state }}
+    with_items: '{{ packages }}'
+
+===========
+with-predefined-list
+
+[root@ip-172-31-1-174 ansible-playbook]# cat with_predef_list.yml
+---
+- hosts: webserver
+  become: yes
+  vars:
+    favorite_snacks:
+    - hotdog
+    - icecream
+    - chips
+  tasks:
+    - name: create directories for storing my snacks
+      file: path=/tmp/{{ item }} state=directory
+      with_items: '{{ favorite_snacks }}'
+
+--------
+with simple list
+
+[root@ip-172-31-1-174 ansible-playbook]# cat with_simple_list.yml
+---
+- hosts: webserver
+  become: yes
+  vars:
+    fn: line1
+  tasks:
+    - name: create file
+      file: path=/tmp/{{ fn }} state=touch
+    - name: Add lines
+      lineinfile: dest=/tmp/{{ fn }} line={{ item }} state=present
+      with_items:
+      - Line 1
+      - Line 2
+      - Line 3
+
+===========================
+
+---
+variable_name: True
+
+
+Then, these tasks with always run.
+
+- name: This is a conditional task
+  module: src=/example/ dest=/example
+  when: variable_name 
+
+- name: This is a conditional task
+  module: src=/example/ dest=/example
+  when: True
+This task will never run.
+
+- name: This is a conditional task
+  module: src=/example/ dest=/example
+  when: False
+
+
+========================
+
+Ansible EC2
+
+---
+- name: Create a new Demo EC2 instance
+  hosts: local
+  connection: local
+  gather_facts: False
+
+  vars:
+      region: ap-south-1
+      instance_type: t2.micro
+      ami: ami-01e074f40dfb9999d  # Ubuntu 16.04 LTS
+      keypair: 01282020 # pem file name
+
+  vars_files:
+     - pass.yml
+  tasks:
+
+    - name: Create an ec2 instance
+      ec2:
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         key_name: "{{ keypair }}"
+         group: JCP  # security group name
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 1  # default
+         count_tag:
+            Name: Demo
+         instance_tags:
+            Name: Demo
+         vpc_subnet_id: subnet-4a002f22
+         assign_public_ip: yes
+      register: ec2_machine
+
+-------------------
+
+I) IAM Account (Programmatic access)
+II) pip install boto boto3 OR yum install -y python2-boto.noarch
+III) ansible vault YML file
+     (eg:- ansible-vault create key.yml)
+IV) To execute the playbook you need the following syntax
+     (eg:- ansible-playbook <playbook name> --ask-vault-pass)
+
+
+=======================================
+
+
+Become
+
+become: can be set to true or yes and triggers the user escalation settings.
+become_user: set to the desired user in the remote host.
+become_method: specify the command used to make login and change user.
+become_flags: change login parameters. Mostly used when you want to change to a system user without shell privileges.
+
+In Tasks
+
+- name: Run script as foo user
+  command: bash.sh
+  become: true
+  become_user: foo
+
+Run all tasks in Role
+
+- hosts: all
+  become: true
+
+- name: Start apache
+  service: apache2
+  state: started
+
+Run a role as root
+
+- hosts: all
+  roles:
+  - { role: myrole, become: yes }
+  - myrole2
+
+
+Dynamic Inventory
+==================
+
+{
+ "_meta": {
+   "hostvars": {
+     "10.1.0.10": {
+       "ansible_user": "vagrant",
+       "ansible_ssh_private_key_file": "/home/mrtuovinen/.ssh/id_rsa",
+       "ansible_port": 22
+ },
+     "10.1.0.11": {
+       "ansible_user": "ubuntu",
+       "ansible_ssh_private_key_file": "/home/mrtuovinen/.ssh/id_rsa",
+       "ansible_port": 22
+ },
+ "10.1.0.12": {
+ "ansible_user": "steve",
+ "ansible_ssh_private_key_file": "/home/mrtuovinen/.ssh/key.pem",
+ "ansible_port": 2222
+ }
+ }
+ },
+ "vagrantbox": [
+ "10.1.0.10"
+ ],
+ "ubuntubox": [
+ "10.1.0.11"
+ ],
+ "osxbox": [
+ "10.1.0.12"
+ ]
+}
+============================
+
+access_key: AKIAZ5NU4V4FWEU7HPSH
+secret_key: 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
+
+Deploy Web Server on AWS through ANSIBLE!
+
+i) Provision EC2 instance through ansible.
+ii) Retrieve the IP Address of instance using a dynamic inventory concept.
+iii) Configure the webserver through ansible.
+iv) Create a role for the webserver to customize the Instance and deploy the webpage to the root directory.
+
+
+
+[defaults]
+host_key_checking = false
+remote_user = ec2-user
+ask_pass = false
+private_key_file = /root/aws-ansible/11Nov21.pem
+roles_path = /root/aws-ansible/roles
+[privilege_escalation]
+become = true
+become_method = sudo
+become_user = root
+become_ask_pass = false
+
+https://medium.com/swlh/configuring-web-server-on-ec2-instance-using-ansible-in-one-click-83139c4cc55e
+
+
+==============
+
+
+---
+- hosts: all
+  become: true
+  vars:
+    create_containers: 4
+    default_container_name: docker
+    default_container_image: ubuntu
+    default_container_command: sleep 1d
+
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu xenial stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ default_container_image }}"
+        source: pull
+
+    - name: Create default containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        image: "{{ default_container_image }}"
+        command: "{{ default_container_command }}"
+        state: present
+      with_sequence: count={{ create_containers }}
